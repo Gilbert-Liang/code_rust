@@ -1,17 +1,27 @@
-// 填空
-use std::ops::{Range, RangeInclusive};
+// 填空，并解决错误
 fn main() {
-    let r1 = Range{ start: 1, end: 6 };
-    let r2 = RangeInclusive::new(1, 5);
+    // 整数加法
+    assert!(1u32 + 2 == 3);
 
-    assert_eq!((1..6), r1);
-    assert_eq!((1..=5),r2);
-    // assert_eq!(r1,r2);
-    // assert_eq!((1..6),(1..=5));
-    for i in r1 {
-        println!("{}",i);
-    }    
-    for i in r2 {
-        println!("{}",i);
-    }
+    // 整数减法
+    assert!(1i32 - 2 == -1);
+    assert!(1u8 - 1 == 0);
+    
+    assert!(3 * 50 == 150);
+
+    assert!((9.6_f64 / 3.2 - 3.0).abs() < 0.1); // error ! 修改它让代码工作
+
+    assert!(24 % 5 == 4);
+    
+    // 逻辑与或非操作
+    assert!(true && false == false);
+    assert!(true || false == true);
+    assert!(!true ==false);
+
+    // 位操作
+    println!("0011 AND 0101 is {:04b}", 0b0011u32 & 0b0101);
+    println!("0011 OR 0101 is {:04b}", 0b0011u32 | 0b0101);
+    println!("0011 XOR 0101 is {:04b}", 0b0011u32 ^ 0b0101);
+    println!("1 << 5 is {}", 1u32 << 5);
+    println!("0x80 >> 2 is 0x{:x}", 0x80u32 >> 2);
 }
