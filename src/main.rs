@@ -1,22 +1,17 @@
-#![allow(unused)]
-use std::fmt::Debug;
+
 fn main() {
-    let mut a = String::from("test");
-    clear(&mut a);
-    // dead_end();
-    forever();
-}
+    // 填空
+    let b = false;
 
-fn clear(text: &mut String) -> () {
-    *text = String::from("");
-}
-
-fn dead_end() -> ! {
-    panic!("你已经到了穷途末路，崩溃吧！");
-  }
-
-fn forever() -> ! {
-    loop {
-      //...
+    let v = match b {
+        true => 1,
+        // 发散函数也可以用于 `match` 表达式，用于替代任何类型的值
+        false => {
+            println!("Success!");
+            panic!("we have no value for `false`, but we can panic")
+        }
     };
+    println!("Excercise Failed if printing out this line!");
+
+    println!("{}",v);
 }
