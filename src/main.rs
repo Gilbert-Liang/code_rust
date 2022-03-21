@@ -1,10 +1,11 @@
-
 fn main() {
-    let t = (String::from("hello"), String::from("world"));
- 
-    // 填空，不要修改其它代码
-    let (s1,s2) = t.clone();
- 
-    println!("{:?}, {:?}, {:?}", s1, s2, t); // -> "hello", "world", ("hello", "world")
- }
- 
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
