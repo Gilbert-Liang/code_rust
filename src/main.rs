@@ -1,11 +1,17 @@
+// use std::thread;
 fn main() {
-    let s1 = String::from("hello");
+    let mut s = String::from("hello");
 
-    let len = calculate_length(&s1);
-
-    println!("The length of '{}' is {}.", s1, len);
+    change1(&mut s);
+    // thread::spawn(change1);
+    change2(&mut s);
+    println!("{}",s);
 }
 
-fn calculate_length(s: &String) -> usize {
-    s.len()
+fn change1(some_string:  &mut String) {
+    some_string.push_str(", world");
+}
+
+fn change2(some_string:  &mut String) {
+    some_string.push_str(", liangdong");
 }
