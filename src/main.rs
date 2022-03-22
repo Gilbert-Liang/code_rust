@@ -1,18 +1,23 @@
 
+// // 移除代码某个部分，让它工作
+// // 你不能移除整行的代码！
+// fn main() {
+//     let mut s = String::from("hello");
+
+//     let r1 = &s;
+//     let r2 = &s;
+
+//     println!("{}, {}", r1, r2);
+// }
+
+
+// 下面的代码没有任何错误
 fn main() {
-    let c = '中';
+    let mut s = String::from("hello, ");
 
-    let r1 = &c;
-    // 填写空白处，但是不要修改其它行的代码
-    let ref r2 = c;
-
-    assert_eq!(*r1, *r2);
+    borrow_object(&s);
     
-    // 判断两个内存地址的字符串是否相等
-    assert_eq!(get_addr(r1),get_addr(r2));
+    s.push_str("world");
 }
 
-// 获取传入引用的内存地址的字符串形式
-fn get_addr(r: &char) -> String {
-    format!("{:p}", r)
-}
+fn borrow_object(s: &String) {}
