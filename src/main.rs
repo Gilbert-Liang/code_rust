@@ -1,11 +1,21 @@
+#![allow(unused_variables)]
+type File = String;
+
+fn open(f: &mut File) -> bool {
+    true
+}
+fn close(f: &mut File) -> bool {
+    true
+}
+
+#[allow(dead_code)]
+fn read(f: &mut File, save_to: &mut Vec<u8>) -> ! {
+    unimplemented!()
+}
+
 fn main() {
-    let mut s = String::from("hello, ");
-
-    let r1 = &mut s;
-    let r2 = &mut s;
-
-    // println!("{} {}",r1,r2);
-    r1.push_str("world");
-    // 在下面增加一行代码人为制造编译错误：cannot borrow `s` as mutable more than once at a time
-    // 你不能同时使用 r1 和 r2
+    let mut f1 = File::from("f1.txt");
+    open(&mut f1);
+    read(&mut f1, &mut vec![]);
+    close(&mut f1);
 }
