@@ -1,21 +1,26 @@
-#![allow(unused_variables)]
-type File = String;
-
-fn open(f: &mut File) -> bool {
-    true
-}
-fn close(f: &mut File) -> bool {
-    true
-}
-
-#[allow(dead_code)]
-fn read(f: &mut File, save_to: &mut Vec<u8>) -> ! {
-    unimplemented!()
-}
-
 fn main() {
-    let mut f1 = File::from("f1.txt");
-    open(&mut f1);
-    read(&mut f1, &mut vec![]);
-    close(&mut f1);
+    let str1 = "Pascal";
+    let str2 = "haskell";
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
+
+    println!("{:p}",str1);
+    println!("{:p}",str2);
+    println!("{:p}",s.as_ptr());
+    println!("{:p}",hello);
+    println!("{:p}",world);
+
+    // println!("{:p}",func1);
+    // println!("{:p}",func2);
+
+}
+
+fn func1() {
+
+}
+
+fn func2() {
+
 }
