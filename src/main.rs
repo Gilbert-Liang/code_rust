@@ -1,6 +1,14 @@
-#![allow(unused)]
 fn main() {
-    let s = "中国人";
-    let a = &s[0..3];
-    println!("{}",a);
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s);
+
+    s.clear(); // error!
+
+    // println!("the first word is: {}", word);
 }
+fn first_word(s: &String) -> &str {
+    &s[..1]
+}
+
+
