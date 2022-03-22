@@ -1,6 +1,6 @@
 fn main() {
-    let str1 = "Pascal";
-    let str2 = "haskell";
+    let str1 = "Pascal";//堆内存
+    let str2 = "haskell";//堆内存
     let s = String::from("hello world");
 
     let hello = &s[0..5];
