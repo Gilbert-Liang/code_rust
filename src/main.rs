@@ -1,12 +1,11 @@
-
-// 注释掉一行代码让它工作
 fn main() {
     let mut s = String::from("hello, ");
 
     let r1 = &mut s;
-    r1.push_str("world");
     let r2 = &mut s;
-    r2.push_str("!");
-    
-    // println!("{}",s);
+
+    // println!("{} {}",r1,r2);
+    r1.push_str("world");
+    // 在下面增加一行代码人为制造编译错误：cannot borrow `s` as mutable more than once at a time
+    // 你不能同时使用 r1 和 r2
 }
