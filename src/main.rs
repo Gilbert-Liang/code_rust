@@ -1,197 +1,171 @@
-// use std::io;
-
-// fn main() {
-//     let a = [1, 2, 3, 4, 5];
-
-//     println!("Please enter an array index.");
-
-//     let mut index = String::new();
-//     // 读取控制台的输出
-//     io::stdin()
-//         .read_line(&mut index)
-//         .expect("Failed to read line");
-
-//     let index: usize = index
-//         .trim()
-//         .parse()
-//         .expect("Index entered was not a number");
-
-//     let element = a[index];
-
-//     println!(
-//         "The value of the element at index {} is: {}",
-//         index, element
-//     );
-
-//     let a1: [i32; 5] = [1,2,3,4,5];
-//     let slice: &[i32] = &a1[1..3];
-//     assert_eq!(slice,&[2,3]);
+// #[warn(dead_code)]
+// enum Direction {
+//     East,
+//     West,
+//     North,
+//     South,
 // }
 
 // fn main() {
-//     // 编译器自动推导出one的类型
-//     let one             = [1, 2, 3];
-//     // 显式类型标注
-//     let two: [u8; 3]    = [1, 2, 3];
-//     let blank1          = [0; 3];
-//     let blank2: [u8; 3] = [0; 3];
-  
-//     // arrays是一个二维数组，其中每一个元素都是一个数组，元素类型是[u8; 3]
-//     let arrays: [[u8; 3]; 4]  = [one, two, blank1, blank2];
-  
-//     // println!("{:?}",arrays);
-//     // 借用arrays的元素用作循环中
-//     for a in &arrays {
-//       print!("{:?}: ", a);
-//       // 将a变成一个迭代器，用于循环
-//       // 你也可以直接用for n in a {}来进行循环
-//       for n in a.iter() {
-//         print!("\t{} + 10 = {}", n, n+10);
-//       }
-  
-//       let mut sum = 0;
-//       // 0..a.len,是一个 Rust 的语法糖，其实就等于一个数组，元素是从0,1,2一直增加到到a.len-1
-//       for i in 0..a.len() {
-//         sum += a[i];
-//       }
-//       println!("\t({:?} = {})", a, sum);
-//     }
-//   }
-
-// fn main() {
-//     let condition = true;
-//     let number = if condition {
-//         5
-//     } else {
-//         "six"
+//     let dire = Direction::South;
+//     match dire {
+//         Direction::East => println!("East"),
+//         Direction::North | Direction::South => {
+//             println!("South or North");
+//         },
+//         _ => println!("West"),
 //     };
-
-//     println!("The value of number is: {}", number);
 // }
 
 
 // #![allow(unused)]
+
+// enum Coin {
+//     Penny,
+//     Nickel,
+//     Dime,
+//     Quarter,
+// }
 // fn main() {
-//     let mut v = 0;
-//     for i in 1..10 {
-//         v = if i == 9 {
-//             continue
-//         } else {
-//             i
-//         }
-//     }
-//     println!("{}", v);
+//     let coin = Coin::Dime;
+//     println!("{}",value_in_cents(coin));
 // }
 
-// fn main() {
-//     let n = 6;
-//     if n % 4 == 0 {
-//         println!("number is divisible by 4");
-//     } else if n % 3 == 0 {
-//         println!("number is divisible by 3");
-//     } else if n % 2 == 0 {
-//         println!("number is divisible by 2");
-//     } else {
-//         println!("number is not divisible by 4, 3, or 2");
-//     }
-// }
-
-// for while loop   
-
-// fn main() {
-//     for i in 1..=5 {
-//         println!("{}",i);
-//     }
-
-    // for item in &container {
-
-    // }
-
-    // for item in &mut collection {
-        //todo可以在循环中修改
-    //}
-    // 注意container实现copy trait非常重要，如果实现了copy trait则不会发生所有权转移，负责会发生所有权转移，因此需要使用引用。
-// }
-//for 使用集合的引用形式，所有权会被转移到for的语句块中。
-
-// fn main() {
-//     let a = [4,3,2,1];
-//     for (i,v) in a.iter().enumerate() {
-//         println!("{}th element is {}",i+1,v);
+// fn value_in_cents(coin: Coin) -> u8 {
+//     match coin {
+//         Coin::Penny =>  {
+//             println!("Lucky penny!");
+//             1
+//         },
+//         Coin::Nickel => 5,
+//         Coin::Dime => 10,
+//         Coin::Quarter => 25,
 //     }
 // }
 
-// fn main() {
-//     for _ in 0..10{
-//         println!("test");
-//     }
-// }
-
-// fn main() {
-//     for i in 1..4 {
-//         if i == 2 {
-//             continue;//break;
-//         }
-//         println!("{}",i);
+// enum IpAddr {
+//     Ipv4,
+//     Ipv6
+//  }
  
+//  fn main() {
+//      // let d_panic = Direction::South;
+//      let ip1 = IpAddr::Ipv6;
+//      let ip_str = match ip1 {
+//          IpAddr::Ipv4 => "127.0.0.1",
+//          _ => "::1",
+//      };
+ 
+//      println!("{}", ip_str);
+//  }
+
+
+// #![allow(unused)]
+// #[derive(Debug)]
+// enum UsState {
+//     Alabama,
+//     Alaska,
+//     // --snip--
+// }
+
+// enum Coin {
+//     Penny,
+//     Nickel,
+//     Dime,
+//     Quarter(UsState), // 25美分硬币
+// }
+// fn main() {
+//     let coin = Coin::Quarter(UsState::Alabama);
+//     println!("{}",value_in_cents(coin));
+// }
+
+// fn value_in_cents(coin: Coin) -> u8 {
+//     match coin {
+//         Coin::Penny => 1,
+//         Coin::Nickel => 5,
+//         Coin::Dime => 10,
+//         Coin::Quarter(state) => {
+//             println!("State quarter from {:?}!", state);
+//             25
+//         },
 //     }
 // }
 
-// fn main() {
-//     let mut n = 0;
-
-//     while n <= 5 {
-//         println!("{}",n);
-
-//         n = n + 1;
-//     }
-
-//     println!("out");
+// enum Action {
+//     Say(String),
+//     MoveTo(i32, i32),
+//     ChangeColorRGB(u16, u16, u16),
 // }
 
 // fn main() {
-//     let mut n = 0;
-
-//     loop {
-//         if n > 5 {
-//             break
+//     let actions = [
+//         Action::Say("Hello Rust".to_string()),
+//         Action::MoveTo(1,2),
+//         Action::ChangeColorRGB(255,255,0),
+//     ];
+//     for action in actions {
+//         match action {
+//             Action::Say(s) => {
+//                 println!("{}", s);
+//             },
+//             Action::MoveTo(x, y) => {
+//                 println!("point from (0, 0) move to ({}, {})", x, y);
+//             },
+//             Action::ChangeColorRGB(r, g, _) => {
+//                 println!("change color into '(r:{}, g:{}, b:0)', 'b' has been ignored",
+//                     r, g,
+//                 );
+//             }
 //         }
-//         println!("{}",n);
-//         n+=1;
 //     }
-//     println!("out");
 // }
+
+// enum Direction {
+//     East,
+//     West,
+//     North,
+//     South,
+// }
+
+// fn main() {
+//     let dire = Direction::South;
+//     match dire {
+//         Direction::East => println!("East"),
+//         Direction::North | Direction::South => {
+//             println!("South or North");
+//         },
+//         Direction::West => println!("West"),
+//     };
+// }
+
+// fn main() {
+//     let v = Some(3u8);
+//     match v{
+//         Some(k) => println!("{}",k),
+//         _ => (),
+//     }
+//     if let Some(k) = v {
+//         println!("{}",k);
+//     }
+// }
+//当你只要匹配一个条件，且忽略其他条件时就用 if let ，否则都用 match。
+
+#[derive(Debug)]
+enum MyEnum {
+    Foo,
+    Bar
+}
 
 fn main() {
-    // let a = [10,20,30,40,50];
+    let v = vec![MyEnum::Foo,MyEnum::Bar,MyEnum::Foo];
+    let v1 = v.iter().filter(|x| matches!(x, MyEnum::Foo));
+    for value in v1.into_iter() {
+        println!("{:?}",value);
+    }
 
-    // let mut index = 0;
+    let foo = 'f';
+    println!("{}",matches!(foo, 'A'..='Z' | 'a'..='z'));
+    let bar = Some(4);
+    println!("{}",matches!(bar, Some(x) if x > 2));
 
-    // while index < 5 {
-    //     println!("the value is: {}", a[index]);
-
-    //     index = index + 1;
-    // }
-
-    // for element in a.iter() {
-    //     println!("the value is: {}", element);
-    // }
-
-    // loop {
-    //     println!("again!");
-    // }
-    
-    // let mut counter = 0;
-
-    // let result = loop {
-    //     counter += 1;
-
-    //     if counter == 10 {
-    //         break counter * 2;
-    //     }
-    // };
-
-    // println!("The result is {}", result);
-
-    
 }
