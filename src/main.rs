@@ -1,50 +1,108 @@
-#![allow(dead_code)]
+// #[derive(Debug)]
+// enum UiObject {
+//     Button,
+//     SelectBox,
+// }
 
-use std::fmt;
-use std::fmt::{Display};
+// fn main() {
+//     let objects = [
+//         UiObject::Button,
+//         UiObject::SelectBox
+//     ];
 
-#[derive(Debug,PartialEq)]
-enum FileState {
-  Open,
-  Closed,
+//     for o in objects {
+//         draw(o)
+//     }
+// }
+
+// fn draw(o: UiObject) {
+//     println!("{:?}",o);
+// }
+
+// pub struct Screen<T: Draw> {
+//     pub components: Vec<T>,
+// }
+
+// impl<T> Screen<T>
+// where
+//     T: Draw,
+// {
+//     pub fn run(&self) {
+//         for component in self.components.iter() {
+//             component.draw();
+//         }
+//     }
+// }
+
+pub trait Draw {
+    fn draw(&self);
 }
 
-#[derive(Debug)]
-struct File {
-  name: String,
-  data: Vec<u8>,
-  state: FileState,
+pub struct Button {
+    pub width: u32,
+    pub height: u32,
+    pub label: String,
 }
 
-impl Display for FileState {
-   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-     match *self {
-         FileState::Open => write!(f, "OPEN"),
-         FileState::Closed => write!(f, "CLOSED"),
-     }
-   }
-}
-
-impl Display for File {
-   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-      write!(f, "<{} ({})>",
-             self.name, self.state)
-   }
-}
-
-impl File {
-  fn new(name: &str) -> File {
-    File {
-        name: String::from(name),
-        data: Vec::new(),
-        state: FileState::Closed,
+impl Draw for Button {
+    fn draw(&self) {
+        //绘制按钮的代码
+        println!("draw button! {} {} {} ",self.width,self.height,self.label);
     }
-  }
+}
+
+struct SelectBox {
+    width: u32,
+    height: u32,
+    options: Vec<String>,
+}
+
+impl Draw for SelectBox {
+    fn draw(&self) {
+        //绘制SelectBox的代码
+        println!("draw selectbox! {} {} {:?} ",self.width,self.height,self.options);
+    }
+}
+
+pub struct Screen {
+    pub components: Vec<Box<dyn Draw>>,
+}
+
+impl Screen {
+    pub fn run(&self) {
+        for component in self.components.iter() {
+            component.draw();
+        }
+    }
 }
 
 fn main() {
-  let f6 = File::new("f6.txt");
-  //...
-  println!("{:?}", f6);
-  println!("{}", f6);
+    let screen = Screen {
+        components: vec![
+            Box::new(SelectBox {
+                width: 75,
+                height: 10,
+                options: vec![
+                    String::from("Yes"),
+                    String::from("Maybe"),
+                    String::from("No"),
+                ],
+            }),
+            Box::new(Button {
+                width: 50,
+                height: 10,
+                label: String::from("OK"),
+            }),
+        ],
+    };
+
+    screen.run();
+
+    // let screen1 = Screen {
+    //     components: vec![
+    //         Box::new(String::from("Hi")),
+    //     ],
+    // };
+
+    // screen1.run();
 }
