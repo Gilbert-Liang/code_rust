@@ -13,3 +13,5 @@ fn main() {
     let w = Wrapper(vec![String::from("hello"), String::from("world")]);
     println!("w = {}", w);
 }
+
+// trait Deref，
