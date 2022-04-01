@@ -1,108 +1,36 @@
-// #[derive(Debug)]
-// enum UiObject {
-//     Button,
-//     SelectBox,
-// }
+#![allow(unused)]
+use std::fmt::Display;
 
-// fn main() {
-//     let objects = [
-//         UiObject::Button,
-//         UiObject::SelectBox
-//     ];
-
-//     for o in objects {
-//         draw(o)
-//     }
-// }
-
-// fn draw(o: UiObject) {
-//     println!("{:?}",o);
-// }
-
-// pub struct Screen<T: Draw> {
-//     pub components: Vec<T>,
-// }
-
-// impl<T> Screen<T>
-// where
-//     T: Draw,
-// {
-//     pub fn run(&self) {
-//         for component in self.components.iter() {
-//             component.draw();
-//         }
-//     }
-// }
-
-pub trait Draw {
-    fn draw(&self);
-}
-
-pub struct Button {
-    pub width: u32,
-    pub height: u32,
-    pub label: String,
-}
-
-impl Draw for Button {
-    fn draw(&self) {
-        //绘制按钮的代码
-        println!("draw button! {} {} {} ",self.width,self.height,self.label);
+trait OutlinePrint: Display {
+    fn outline_print(&self) {
+        let output = self.to_string();
+        let len = output.len();
+        println!("{}", "*".repeat(len + 4));
+        println!("*{}*", " ".repeat(len + 2));
+        println!("* {} *", output);
+        println!("*{}*", " ".repeat(len + 2));
+        println!("{}", "*".repeat(len + 4));
     }
 }
 
-struct SelectBox {
-    width: u32,
-    height: u32,
-    options: Vec<String>,
+struct Point {
+    x: i32,
+    y: i32,
 }
 
-impl Draw for SelectBox {
-    fn draw(&self) {
-        //绘制SelectBox的代码
-        println!("draw selectbox! {} {} {:?} ",self.width,self.height,self.options);
+impl Display for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f,"(x = {}, y = {})",self.x,self.y)
     }
+    
 }
 
-pub struct Screen {
-    pub components: Vec<Box<dyn Draw>>,
-}
-
-impl Screen {
-    pub fn run(&self) {
-        for component in self.components.iter() {
-            component.draw();
-        }
-    }
-}
-
+impl OutlinePrint for Point {}
 fn main() {
-    let screen = Screen {
-        components: vec![
-            Box::new(SelectBox {
-                width: 75,
-                height: 10,
-                options: vec![
-                    String::from("Yes"),
-                    String::from("Maybe"),
-                    String::from("No"),
-                ],
-            }),
-            Box::new(Button {
-                width: 50,
-                height: 10,
-                label: String::from("OK"),
-            }),
-        ],
+    let p = Point {
+        x: 1,
+        y: 2,
     };
 
-    screen.run();
-
-    // let screen1 = Screen {
-    //     components: vec![
-    //         Box::new(String::from("Hi")),
-    //     ],
-    // };
-
-    // screen1.run();
+    p.outline_print();
 }
